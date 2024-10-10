@@ -3,11 +3,10 @@ import data from './data.json';
 import {useState} from "react";
 
 export const App = () => {
-	const [steps, setSteps] = useState(data);
 	const [activeStep, setActiveStep] = useState(0);
 
 	const stepForward = () => {
-		activeStep < steps.length - 1 ? setActiveStep(activeStep + 1) : null;
+		activeStep < data.length - 1 ? setActiveStep(activeStep + 1) : null;
 	}
 	const stepBack = () => {
 		activeStep > 0 ? setActiveStep(activeStep - 1) : null;
@@ -23,12 +22,12 @@ export const App = () => {
 				<div className={styles.steps}>
 					<div className={styles['steps-content']}>
 						{/* Для получения активного контента используйте steps и activeIndex */
-							steps[activeStep].content
+							data[activeStep].content
 						}
 					</div>
 					<ul className={styles['steps-list']}>
 						{
-							steps.map((step, id) => (
+							data.map((step, id) => (
 								<li className={activeStep === id || activeStep> id ? styles['steps-item'] +
 									' ' +
 									styles.done +
@@ -45,8 +44,8 @@ export const App = () => {
 					</ul>
 					<div className={styles['buttons-container']}>
 						<button className={styles.button} disabled={activeStep === 0} onClick={stepBack}>Назад</button>
-						<button className={styles.button} onClick={() => activeStep === steps.length - 1 ? startOver() : stepForward()}>
-							{activeStep === steps.length - 1 ? 'Начать сначала'  : 'Далее'}
+						<button className={styles.button} onClick={() => activeStep === data.length - 1 ? startOver() : stepForward()}>
+							{activeStep === data.length - 1 ? 'Начать сначала'  : 'Далее'}
 						</button>
 					</div>
 				</div>
